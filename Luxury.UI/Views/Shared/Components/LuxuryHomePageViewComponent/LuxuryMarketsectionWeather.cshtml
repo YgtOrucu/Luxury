@@ -1,0 +1,59 @@
+﻿@model List<WeatherDto>
+
+<div class="col-12 col-sm-6 col-xl-3" role="listitem">
+    <article class="market-card glass-card" aria-label="Hava durumu kartı">
+
+        <div class="market-card-header">
+            <div class="market-icon market-icon--weather" aria-hidden="true">
+                <i class="bi bi-cloud-sun"></i>
+            </div>
+        </div>
+
+        <h3 class="market-card-title">Hava Durumu</h3>
+
+        @foreach (var item in Model ?? Enumerable.Empty<WeatherDto>())
+        {
+            <div class="weather-card">
+
+                <div class="weather-header">
+                    <span class="weather-city">@item?.City ?? ""</span>
+                </div>
+
+                <div class="weather-main">
+                    <div class="weather-icon-large">
+                        @item?.WeatherIcon ?? ""
+                    </div>
+
+                    <div class="weather-temp-block">
+                        <span class="weather-temp">@item?.Temp ?? ""°C</span>
+                        <span class="weather-desc">Hava sıcaklığı</span>
+                    </div>
+                </div>
+
+                <div class="weather-details">
+                    <div class="weather-detail-item">
+                        <i class="bi bi-droplet"></i>
+                        <span>%@item?.Humidity ?? ""</span>
+                    </div>
+
+                    <div class="weather-detail-item">
+                        <i class="bi bi-wind"></i>
+                        <span>@item?.Wind ?? "" km/s</span>
+                    </div>
+
+                    <div class="weather-detail-item">
+                        <i class="bi bi-eye"></i>
+                        <span>@item?.Visibility ?? "" km</span>
+                    </div>
+                </div>
+
+            </div>
+        }
+
+
+        <p class="market-updated">
+            Son güncelleme: @DateTime.Now.ToString("HH:mm")
+        </p>
+
+    </article>
+</div>

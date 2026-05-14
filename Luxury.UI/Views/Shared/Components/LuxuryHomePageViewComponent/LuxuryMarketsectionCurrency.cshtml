@@ -1,0 +1,72 @@
+﻿@model List<CurrencyDto>
+
+<div class="col-12 col-sm-6 col-xl-3" role="listitem">
+    <article class="market-card glass-card" aria-label="Döviz kurları kartı">
+
+        <div class="market-card-header">
+            <div class="market-icon market-icon--currency" aria-hidden="true">
+                <i class="bi bi-currency-exchange"></i>
+            </div>
+        </div>
+
+        <h3 class="market-card-title">Döviz Kurları</h3>
+
+        <div class="market-data-content">
+
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model ?? Enumerable.Empty<CurrencyDto>())
+                {
+                    <div class="currency-row">
+
+                        <!-- LEFT INFO (Crypto style) -->
+                        <div class="currency-info">
+                            <div style="display:flex; flex-direction:column;">
+                                <span class="currency-pair">
+                                    @item.Name / TRY
+                                </span>
+
+                                <span class="currency-desc">
+                                    @item.ShortName
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- RIGHT VALUES (Crypto style) -->
+                        <div class="currency-values">
+                            <span class="currency-price">
+                                @item.Price.ToString("0.00")
+                            </span>
+
+                            <span class="currency-change @(item.ChangeRate < 0 ? "down" : "up")"
+                                  aria-live="polite">
+                                @item.ChangeRate.ToString("0.00") %
+                            </span>
+                        </div>
+
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="currency-row">
+                    <div class="currency-info">
+                        <span class="currency-pair">Veri yok</span>
+                        <span class="currency-desc">-</span>
+                    </div>
+
+                    <div class="currency-values">
+                        <span class="currency-price">-</span>
+                        <span class="currency-change">-</span>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+        <p class="market-updated">
+            Son güncelleme: @DateTime.Now.ToString("HH:mm")
+        </p>
+
+    </article>
+</div>

@@ -1,0 +1,54 @@
+﻿@model List<CryptoDto>
+
+<div class="col-12 col-sm-6 col-xl-3" role="listitem">
+    <article class="market-card glass-card" aria-label="Kripto para kartı">
+
+        <div class="market-card-header">
+            <div class="market-icon market-icon--crypto" aria-hidden="true">
+                <i class="bi bi-coin"></i>
+            </div>
+        </div>
+
+        <h3 class="market-card-title">Kripto Para</h3>
+
+        <div class="market-data-content">
+
+            @foreach(var coin in Model ?? Enumerable.Empty<CryptoDto>())
+            {
+                <div class="crypto-row">
+
+                    <div class="crypto-info">
+                        <img src="@coin.Image"
+                             alt="@coin.Name"
+                             width="24"
+                             height="24"
+                             style="border-radius:50%; margin-right:8px;" />
+
+                        <div style="display:flex; flex-direction:column;">
+                            <span class="crypto-symbol">@coin.Symbol</span>
+                            <span class="crypto-name">@coin.Name</span>
+                        </div>
+                    </div>
+
+                    <div class="crypto-values">
+                        <span class="crypto-price">
+                            @coin.Price.ToString("N2")
+                        </span>
+
+                        <span class="crypto-change @(coin.Change < 0 ? "down" : "up")"
+                              aria-live="polite">
+                            @coin.Change.ToString("0.00") %
+                        </span>
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+        <p class="market-updated">
+            Son güncelleme: @DateTime.Now.ToString("HH:mm")
+        </p>
+
+    </article>
+</div>

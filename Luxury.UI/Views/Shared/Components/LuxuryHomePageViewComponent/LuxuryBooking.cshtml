@@ -1,0 +1,152 @@
+﻿<section class="booking-section" id="booking-form" aria-label="Otel Arama Formu">
+    <div class="container-xl">
+        <div class="booking-wrapper glass-card">
+ 
+            <div class="booking-header">
+                <h2 class="booking-title">Rezervasyon Ara</h2>
+                <p class="booking-subtitle">Hayalinizdeki konaklamayı birkaç adımda bulun</p>
+            </div>
+
+            <form class="booking-form"
+                  action="/Hotel/Search"
+                  method="get"
+                  id="hotelSearchForm"
+                  role="search"
+                  aria-label="Otel arama formu">
+ 
+                <div class="row g-3 align-items-end">
+                    <!-- Şehir -->
+
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="form-group-luxury">
+                            <label for="city" class="form-label-luxury">
+                                <i class="bi bi-geo-alt" aria-hidden="true"></i> Şehir / Destinasyon
+                            </label>
+                            <input type="text"
+                                   class="form-control-luxury"
+                                   id="city"
+                                   name="city"
+                                   placeholder="Paris, Roma, Dubai..."
+                                   autocomplete="off"
+                                   required
+                                   aria-required="true"
+                                   aria-label="Şehir veya destinasyon giriniz" />
+                            <div class="input-highlight" aria-hidden="true"></div>
+                        </div>
+                    </div>
+ 
+                    <!-- Check-in -->
+                    <div class="col-6 col-md-3 col-lg-2">
+                        <div class="form-group-luxury">
+                            <label for="checkIn" class="form-label-luxury">
+                                <i class="bi bi-calendar3" aria-hidden="true"></i> Giriş Tarihi
+                            </label>
+                            <input type="date"
+                                   class="form-control-luxury"
+                                   id="checkIn"
+                                   name="checkIn"
+                                   required
+                                   aria-required="true"
+                                   aria-label="Giriş tarihi" />
+                            <div class="input-highlight" aria-hidden="true"></div>
+                        </div>
+                    </div>
+ 
+                    <!-- Check-out -->
+                    <div class="col-6 col-md-3 col-lg-2">
+                        <div class="form-group-luxury">
+                            <label for="checkOut" class="form-label-luxury">
+                                <i class="bi bi-calendar3-fill" aria-hidden="true"></i> Çıkış Tarihi
+                            </label>
+                            <input type="date"
+                                   class="form-control-luxury"
+                                   id="checkOut"
+                                   name="checkOut"
+                                   required
+                                   aria-required="true"
+                                   aria-label="Çıkış tarihi" />
+                            <div class="input-highlight" aria-hidden="true"></div>
+                        </div>
+                    </div>
+ 
+                    <!-- Yetişkin -->
+                    <div class="col-4 col-md-4 col-lg-1">
+                        <div class="form-group-luxury">
+                            <label for="adults" class="form-label-luxury">
+                                <i class="bi bi-person" aria-hidden="true"></i> Yetişkin
+                            </label>
+                            <select class="form-control-luxury"
+                                    id="adults"
+                                    name="adults"
+                                    aria-label="Yetişkin sayısı">
+                                <option value="1" selected>1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6+</option>
+                            </select>
+                            <div class="input-highlight" aria-hidden="true"></div>
+                        </div>
+                    </div>
+ 
+                    <!-- Çocuk -->
+                    <div class="col-4 col-md-4 col-lg-1">
+                        <div class="form-group-luxury">
+                            <label for="children" class="form-label-luxury">
+                                <i class="bi bi-person-heart" aria-hidden="true"></i> Çocuk
+                            </label>
+                            <select class="form-control-luxury"
+                                    id="children"
+                                    name="children"
+                                    aria-label="Çocuk sayısı">
+                                <option value="0" selected>0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4+</option>
+                            </select>
+                            <div class="input-highlight" aria-hidden="true"></div>
+                        </div>
+                    </div>
+ 
+                    <!-- Oda -->
+                    <div class="col-4 col-md-4 col-lg-1">
+                        <div class="form-group-luxury">
+                            <label for="rooms" class="form-label-luxury">
+                                <i class="bi bi-door-open" aria-hidden="true"></i> Oda
+                            </label>
+                            <select class="form-control-luxury"
+                                    id="rooms"
+                                    name="rooms"
+                                    aria-label="Oda sayısı">
+                                <option value="1" selected>1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4+</option>
+                            </select>
+                            <div class="input-highlight" aria-hidden="true"></div>
+                        </div>
+                    </div>
+ 
+                    <!-- Search Button -->
+                    <div class="col-12 col-lg-2">
+                        <button type="submit"
+                                class="btn-search-luxury w-100"
+                                aria-label="Otel ara">
+                            <i class="bi bi-search" aria-hidden="true"></i>
+                            <span>Ara</span>
+                            <div class="btn-shimmer" aria-hidden="true"></div>
+                        </button>
+                    </div>
+ 
+                </div>
+
+                <div class="form-error-msg" id="formError" role="alert" aria-live="polite" hidden>
+                    Lütfen tüm zorunlu alanları doldurun.
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+ 

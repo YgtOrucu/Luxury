@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Luxury.API/Luxury.API.csproj" />
+  <Project Path="Luxury.BusinessLayer/Luxury.BusinessLayer.csproj" Id="f605edd8-b51f-4d05-b30a-162229fb1bdc" />
+  <Project Path="Luxury.DtoLayer/Luxury.DtoLayer.csproj" Id="4f0ce483-b047-4e24-b82f-2f0e4c163dd3" />
+  <Project Path="Luxury.UI/Luxury.UI.csproj" />
+</Solution>

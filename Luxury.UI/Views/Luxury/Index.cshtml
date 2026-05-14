@@ -1,0 +1,27 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+@await Component.InvokeAsync("LuxuryHead")
+<body>
+ 
+    <div class="grain-overlay" aria-hidden="true"></div>
+
+    @await Component.InvokeAsync("LuxuryNavbar")
+    @await Component.InvokeAsync("LuxuryHero")
+    @await Component.InvokeAsync("LuxuryBooking")
+    @await Component.InvokeAsync("LuxuryFeature")
+    @await Component.InvokeAsync("LuxuryDestinations")
+    @await Component.InvokeAsync("LuxuryMarketsection")
+    @await Component.InvokeAsync("LuxuryFooter")
+ 
+    <button class="back-to-top" id="backToTop" aria-label="Sayfanın başına git">
+        <i class="bi bi-chevron-up" aria-hidden="true"></i>
+    </button>
+ 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/Luxury.js"></script>
+</body>
+</html>

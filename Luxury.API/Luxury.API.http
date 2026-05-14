@@ -1,0 +1,6 @@
+@Luxury.API_HostAddress = http://localhost:5259
+
+GET {{Luxury.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
