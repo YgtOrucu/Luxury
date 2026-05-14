@@ -1,0 +1,60 @@
+﻿@model FuelDto
+
+<div class="col-12 col-sm-6 col-xl-3" role="listitem">
+    <article class="market-card glass-card" aria-label="Akaryakıt fiyatları kartı">
+
+        <div class="market-card-header">
+            <div class="market-icon market-icon--fuel" aria-hidden="true">
+                <i class="bi bi-fuel-pump"></i>
+            </div>
+        </div>
+
+        <h3 class="market-card-title">Akaryakıt</h3>
+
+        <div class="market-data-content">
+            @if (Model == null)
+            {
+                <div class="alert alert-light p-2 text-center" style="font-size: 0.8rem;">
+                    <i class="bi bi-exclamation-triangle"></i> Veriler şu an alınamıyor.
+                </div>
+            }
+            else
+            {
+                <div class="fuel-row">
+                    <div class="fuel-label">
+                        <span class="fuel-dot fuel-dot--green"></span>
+                        <span>Benzin 95</span>
+                    </div>
+                    <span class="fuel-price">
+                        @(Model.Gasoline95 == 0 ? "Yükleniyor..." : Model.Gasoline95.ToString("N2") + " TL")
+                    </span>
+                </div>
+
+                <div class="fuel-row">
+                    <div class="fuel-label">
+                        <span class="fuel-dot fuel-dot--amber"></span>
+                        <span>Motorin</span>
+                    </div>
+                    <span class="fuel-price">
+                        @(Model.Diesel == 0 ? "Yükleniyor..." : Model.Diesel.ToString("N2") + " TL")
+                    </span>
+                </div>
+
+                <div class="fuel-row">
+                    <div class="fuel-label">
+                        <span class="fuel-dot fuel-dot--gas"></span>
+                        <span>Gaz</span>
+                    </div>
+                    <span class="fuel-price">
+                        @(Model.Lpg == 0 ? "Yükleniyor..." : Model.Lpg.ToString("N2") + " TL")
+                    </span>
+                </div>
+            }
+        </div>
+
+        <p class="market-updated">
+            Son güncelleme: @DateTime.Now.ToString("HH:mm")
+        </p>
+
+    </article>
+</div>

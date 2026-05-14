@@ -17,8 +17,8 @@ namespace Luxury.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var currency = await _marketDataService.GetMarkerDataAsync();
-            return Ok(currency);
+            var markerdata = await _marketDataService.GetMarkerDataAsync();
+            return Ok(markerdata);
         }
     }
 }

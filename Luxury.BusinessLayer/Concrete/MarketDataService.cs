@@ -1,5 +1,4 @@
 ﻿using Luxury.BusinessLayer.Abstract;
-using Luxury.BusinessLayer.Models.RapidApi.Luxury.BusinessLayer.Models.RapidApi;
 using Luxury.DtoLayer.Dtos.MarketDataDtos;
 using Microsoft.Extensions.Configuration;
 using System.Globalization;
@@ -9,18 +8,24 @@ namespace Luxury.BusinessLayer.Concrete
 {
     public class MarketDataService : IMarketDataService
     {
-        private readonly IConfiguration _config;
-        private readonly IMarkerDataCurrencyService _currencyService;
-        private readonly IMarkerDataCoinService _coinService;
+        //private readonly IConfiguration _config;
+        //private readonly IMarkerDataCurrencyService _currencyService;
+        //private readonly IMarkerDataCoinService _coinService;
+        private readonly IMarkerDataFuelService _fuelService;
+        //private readonly IMarkerDataWeatherService _weatherService;
 
         public MarketDataService(
-            IConfiguration config,
-            IMarkerDataCurrencyService currencyService,
-            IMarkerDataCoinService coinService)
+            //IConfiguration config,
+            //IMarkerDataCurrencyService currencyService,
+            //IMarkerDataCoinService coinService,
+            IMarkerDataFuelService fuelService
+            /*IMarkerDataWeatherService weatherService*/)
         {
-            _config = config;
-            _currencyService = currencyService;
-            _coinService = coinService;
+            //_config = config;
+            //_currencyService = currencyService;
+            //_coinService = coinService;
+            _fuelService = fuelService;
+            //_weatherService = weatherService;
         }
 
         public async Task<MarketDataDto> GetMarkerDataAsync()
@@ -42,7 +47,7 @@ namespace Luxury.BusinessLayer.Concrete
             //var weatherList = new List<WeatherDto>();
             //foreach (var city in cities)
             //{
-            //    var weatherresponse = await GetWeatherDataAsync(city, "TR");
+            //    var weatherresponse = await _weatherService.GetWeatherData(city, "TR");
             //
             //    weatherList.Add(new WeatherDto
             //    {
@@ -82,40 +87,31 @@ namespace Luxury.BusinessLayer.Concrete
             //}).ToList();
             /*COİN API RAPIDAPI*/
 
+            /*Fuel API RAPIDAPI*/
 
+            //var fuelresponse = await _fuelService.GetFuelPrices();
+            //
+            //var fuel = fuelresponse.result.Where(x => x.country == "Turkey").Select(x => new FuelDto
+            //{
+            //    Diesel = (decimal.Parse(x.diesel)) * 53,
+            //    Gasoline95 = (decimal.Parse(x.gasoline)) * 53,
+            //    Lpg = (decimal.Parse(x.lpg)) * 53
+            //}).FirstOrDefault();
+
+
+
+
+
+            /*Fuel API RAPIDAPI*/
 
 
             return new MarketDataDto
             {
                 //Currency = currency,
                 //Weather = weatherList,
-                //Coins = coins
+                //Coins = coins,
+                //Fuel = fuel
             };
-        }
-
-        private async Task<WeatherApiResponse> GetWeatherDataAsync(string city, string lang)
-        {
-            var baseUrl = _config["RapidApi:WeatherBaseUrl"];
-            var endpoint = _config["RapidApi:WeatherEndpoint"];
-            var client = new HttpClient();
-
-            var request = new HttpRequestMessage
-            {
-                Method = HttpMethod.Get,
-                RequestUri = new Uri($"{baseUrl}{endpoint}?city={city}&lang={lang}"),
-                Headers =
-                {
-                    { "x-rapidapi-key", _config["RapidApi:WeatherApiKey"] },
-                    { "x-rapidapi-host", _config["RapidApi:WeatherHost"] },
-                },
-            };
-            using (var response = await client.SendAsync(request))
-            {
-                response.EnsureSuccessStatusCode();
-                var body = await response.Content.ReadFromJsonAsync<WeatherApiResponse>();
-                return body;
-            }
-            throw new NotImplementedException();
-        }
+        }  
     }
 }

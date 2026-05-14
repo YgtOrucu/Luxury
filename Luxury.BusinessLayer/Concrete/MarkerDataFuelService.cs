@@ -6,41 +6,36 @@ using System.Net.Http.Json;
 
 namespace Luxury.BusinessLayer.Concrete
 {
-    public class MarkerDataCurrencyService : IMarkerDataCurrencyService
+    public class MarkerDataFuelService : IMarkerDataFuelService
     {
         private readonly RapidApiOptions _options;
 
-        public MarkerDataCurrencyService(IOptions<RapidApiOptions> options)
+        public MarkerDataFuelService(IOptions<RapidApiOptions> options)
         {
             _options = options.Value;
         }
 
-        public async Task<CurrencyApiResponse> GetCurrencyRate()
+        public async Task<FuelApiResponse> GetFuelPrices()
         {
-
-            var baseUrl = _options.Services.Currency.BaseUrl;
-            var endpoint = _options.Services.Currency.Endpoints.ExchangeRate;
+            var baseurl = _options.Services.Fuel.BaseUrl;
+            var endpoint = _options.Services.Fuel.Endpoints.EuropaCountry;
             var client = new HttpClient();
-
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri($"{baseUrl}{endpoint}?code=USD%2CEUR%2CGBP%2CCHF%2CSAR%2CAED%2CJPY%2CCNY%2CRUB%2CINR"),
+                RequestUri = new Uri($"{baseurl}{endpoint}"),
                 Headers =
                 {
                     { "x-rapidapi-key", _options.ApiKey },
-                    { "x-rapidapi-host", _options.Services.Currency.Host },
+                    { "x-rapidapi-host", _options.Services.Fuel.Host },
                 },
             };
-
             using (var response = await client.SendAsync(request))
             {
                 response.EnsureSuccessStatusCode();
-                var body = await response.Content.ReadFromJsonAsync<CurrencyApiResponse>();
+                var body = await response.Content.ReadFromJsonAsync<FuelApiResponse>();
                 return body;
-                
             }
-            throw new NotImplementedException();
-        }       
+        }
     }
 }

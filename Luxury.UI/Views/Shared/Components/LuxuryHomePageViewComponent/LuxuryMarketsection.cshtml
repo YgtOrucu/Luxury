@@ -11,62 +11,9 @@
 
         <div class="row g-4" role="list" aria-label="Piyasa veri kartları">
             @await Component.InvokeAsync("LuxuryMarketsectionCurrency", new { Model?.Currency })
-            @await Component.InvokeAsync("LuxuryMarketsectionWeather",new {Model?.Weather})
-            @await Component.InvokeAsync("LuxuryMarketsectionCoins",new {Model?.Coins}) 
-
-            <!-- ================= AKARYAKIT ================= -->
-            <div class="col-12 col-sm-6 col-xl-3" role="listitem">
-                <article class="market-card glass-card" aria-label="Akaryakıt fiyatları kartı">
-
-                    <div class="market-card-header">
-                        <div class="market-icon market-icon--fuel" aria-hidden="true">
-                            <i class="bi bi-fuel-pump"></i>
-                        </div>
-                       
-                    </div>
-
-                    <h3 class="market-card-title">Akaryakıt</h3>
-
-                    <div class="market-data-content">
-
-                        <div class="fuel-row">
-                            <div class="fuel-label">
-                                <span class="fuel-dot fuel-dot--green"></span>
-                                <span>Benzin 95</span>
-                            </div>
-                            <span class="fuel-price">—</span>
-                        </div>
-
-                        <div class="fuel-row">
-                            <div class="fuel-label">
-                                <span class="fuel-dot fuel-dot--amber"></span>
-                                <span>Motorin</span>
-                            </div>
-                            <span class="fuel-price">—</span>
-                        </div>
-
-                        <div class="fuel-row">
-                            <div class="fuel-label">
-                                <span class="fuel-dot fuel-dot--gas"></span>
-                                <span>Gaz</span>
-                            </div>
-                            <span class="fuel-price">—</span>
-                        </div>
-
-                        <div class="fuel-change-wrap">
-                            <span>Günlük değişim:</span>
-                            <span class="fuel-change"></span>
-                        </div>
-
-                    </div>
-
-                    <p class="market-updated">Son güncelleme: @DateTime.Now.ToString("HH:mm")</p>
-
-                </article>
-            </div>
-
+            @await Component.InvokeAsync("LuxuryMarketsectionWeather", new { Model?.Weather })
+            @await Component.InvokeAsync("LuxuryMarketsectionCoins", new { Model?.Coins })
+            @await Component.InvokeAsync("LuxuryMarketsectionFuel", new { Fuel = Model?.Fuel })
         </div>
-
-    </div>
     </div>
 </section>

@@ -1,23 +1,24 @@
 ﻿using Luxury.BusinessLayer.Abstract;
 using Luxury.BusinessLayer.Models.RapidApi;
-using Microsoft.Extensions.Configuration;
+using Luxury.BusinessLayer.Settings;
+using Microsoft.Extensions.Options;
 using System.Net.Http.Json;
 
 namespace Luxury.BusinessLayer.Concrete
 {
     public class MarkerDataCoinService : IMarkerDataCoinService
     {
-        private readonly IConfiguration _config;
+        private readonly RapidApiOptions _options;
 
-        public MarkerDataCoinService(IConfiguration config)
+        public MarkerDataCoinService(IOptions<RapidApiOptions> options)
         {
-            _config = config;
+            _options = options.Value;
         }
 
         public async Task<CryptoApiResponse> GetApiResponseAsync()
         {
-            var baseUrl = _config["RapidApi:CoinBaseUrl"];
-            var endpoint = _config["RapidApi:CoinEndpoint"];
+            var baseUrl = _options.Services.Crypto.BaseUrl;
+            var endpoint = _options.Services.Crypto.Endpoints.MiniPrices;
             var client = new HttpClient();
 
             var request = new HttpRequestMessage
@@ -26,8 +27,8 @@ namespace Luxury.BusinessLayer.Concrete
                 RequestUri = new Uri($"{baseUrl}{endpoint}?base_currency=TRY&page=1&page_size=10"),
                 Headers =
                 {
-                    { "x-rapidapi-key", _config["RapidApi:CoinApiKey"] },
-                    { "x-rapidapi-host", _config["RapidApi:CoinHost"] },
+                    { "x-rapidapi-key", _options.ApiKey },
+                    { "x-rapidapi-host", _options.Services.Crypto.Host },
                 },
             };
 

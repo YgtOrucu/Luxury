@@ -6,37 +6,36 @@ using System.Net.Http.Json;
 
 namespace Luxury.BusinessLayer.Concrete
 {
-    public class MarkerDataCurrencyService : IMarkerDataCurrencyService
+    public class MarkerDataWeatherService : IMarkerDataWeatherService
     {
         private readonly RapidApiOptions _options;
 
-        public MarkerDataCurrencyService(IOptions<RapidApiOptions> options)
+        public MarkerDataWeatherService(IOptions<RapidApiOptions> options)
         {
             _options = options.Value;
         }
 
-        public async Task<CurrencyApiResponse> GetCurrencyRate()
+        public async Task<WeatherApiResponse> GetWeatherData(string city, string lang)
         {
-
-            var baseUrl = _options.Services.Currency.BaseUrl;
-            var endpoint = _options.Services.Currency.Endpoints.ExchangeRate;
+            var baseUrl = _options.Services.Weather.BaseUrl;
+            var endpoint = _options.Services.Weather.Endpoints.City;
             var client = new HttpClient();
 
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri($"{baseUrl}{endpoint}?code=USD%2CEUR%2CGBP%2CCHF%2CSAR%2CAED%2CJPY%2CCNY%2CRUB%2CINR"),
+                RequestUri = new Uri($"{baseUrl}{endpoint}?city={city}&lang={lang}"),
                 Headers =
                 {
                     { "x-rapidapi-key", _options.ApiKey },
-                    { "x-rapidapi-host", _options.Services.Currency.Host },
+                    { "x-rapidapi-host", _options.Services.Weather.Host },
                 },
             };
 
             using (var response = await client.SendAsync(request))
             {
                 response.EnsureSuccessStatusCode();
-                var body = await response.Content.ReadFromJsonAsync<CurrencyApiResponse>();
+                var body = await response.Content.ReadFromJsonAsync<WeatherApiResponse>();
                 return body;
                 
             }
