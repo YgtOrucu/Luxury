@@ -5,9 +5,9 @@ namespace Luxury.UI.ViewComponents.LuxuryHomePageViewComponent
 {
     public class LuxuryMarketsectionCoins : ViewComponent
     {
-        public IViewComponentResult Invoke(List<CryptoDto> coins)
+        public IViewComponentResult Invoke(List<CryptoDto> Coins)
         {
-            return View("~/Views/Shared/Components/LuxuryHomePageViewComponent/LuxuryMarketsectionCoins.cshtml", coins);
+            return View("~/Views/Shared/Components/LuxuryHomePageViewComponent/LuxuryMarketsectionCoins.cshtml", Coins);
         }
     }
 }

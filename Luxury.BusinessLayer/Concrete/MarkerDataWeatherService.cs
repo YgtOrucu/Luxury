@@ -9,17 +9,19 @@ namespace Luxury.BusinessLayer.Concrete
     public class MarkerDataWeatherService : IMarkerDataWeatherService
     {
         private readonly RapidApiOptions _options;
+        private readonly HttpClient _httpClient;
 
-        public MarkerDataWeatherService(IOptions<RapidApiOptions> options)
+        public MarkerDataWeatherService(IOptions<RapidApiOptions> options, HttpClient httpClient)
         {
             _options = options.Value;
+            _httpClient = httpClient;
         }
 
         public async Task<WeatherApiResponse> GetWeatherData(string city, string lang)
         {
             var baseUrl = _options.Services.Weather.BaseUrl;
             var endpoint = _options.Services.Weather.Endpoints.City;
-            var client = new HttpClient();
+            var client = _httpClient;
 
             var request = new HttpRequestMessage
             {
@@ -32,14 +34,14 @@ namespace Luxury.BusinessLayer.Concrete
                 },
             };
 
-            using (var response = await client.SendAsync(request))
-            {
-                response.EnsureSuccessStatusCode();
-                var body = await response.Content.ReadFromJsonAsync<WeatherApiResponse>();
-                return body;
-                
-            }
-            throw new NotImplementedException();
+            //using (var response = await client.SendAsync(request))
+            //{
+            //    response.EnsureSuccessStatusCode();
+            //    var body = await response.Content.ReadFromJsonAsync<WeatherApiResponse>();
+            //    return body;
+            //    
+            //}
+            return null;
         }       
     }
 }

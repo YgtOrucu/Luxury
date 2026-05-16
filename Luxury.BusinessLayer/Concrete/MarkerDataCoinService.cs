@@ -9,17 +9,19 @@ namespace Luxury.BusinessLayer.Concrete
     public class MarkerDataCoinService : IMarkerDataCoinService
     {
         private readonly RapidApiOptions _options;
+        private readonly HttpClient _httpClient;
 
-        public MarkerDataCoinService(IOptions<RapidApiOptions> options)
+        public MarkerDataCoinService(IOptions<RapidApiOptions> options, HttpClient httpClient)
         {
             _options = options.Value;
+            _httpClient = httpClient;
         }
 
         public async Task<CryptoApiResponse> GetApiResponseAsync()
         {
             var baseUrl = _options.Services.Crypto.BaseUrl;
             var endpoint = _options.Services.Crypto.Endpoints.MiniPrices;
-            var client = new HttpClient();
+            var client = _httpClient;
 
             var request = new HttpRequestMessage
             {
@@ -32,13 +34,13 @@ namespace Luxury.BusinessLayer.Concrete
                 },
             };
 
-            using (var response = await client.SendAsync(request))
-            {
-                response.EnsureSuccessStatusCode();
-                var body = await response.Content.ReadFromJsonAsync<CryptoApiResponse>();
-                return body;
-            }
-            throw new NotImplementedException();
+            //using (var response = await client.SendAsync(request))
+            //{
+            //    response.EnsureSuccessStatusCode();
+            //    var body = await response.Content.ReadFromJsonAsync<CryptoApiResponse>();
+            //    return body;
+            //}
+            return null;
 
         }
     }

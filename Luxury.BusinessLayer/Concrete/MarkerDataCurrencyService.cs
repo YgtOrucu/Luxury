@@ -9,10 +9,12 @@ namespace Luxury.BusinessLayer.Concrete
     public class MarkerDataCurrencyService : IMarkerDataCurrencyService
     {
         private readonly RapidApiOptions _options;
+        private readonly HttpClient _httpClient;
 
-        public MarkerDataCurrencyService(IOptions<RapidApiOptions> options)
+        public MarkerDataCurrencyService(IOptions<RapidApiOptions> options, HttpClient httpClient)
         {
             _options = options.Value;
+            _httpClient = httpClient;
         }
 
         public async Task<CurrencyApiResponse> GetCurrencyRate()
@@ -20,7 +22,7 @@ namespace Luxury.BusinessLayer.Concrete
 
             var baseUrl = _options.Services.Currency.BaseUrl;
             var endpoint = _options.Services.Currency.Endpoints.ExchangeRate;
-            var client = new HttpClient();
+            var client = _httpClient;
 
             var request = new HttpRequestMessage
             {
@@ -33,14 +35,14 @@ namespace Luxury.BusinessLayer.Concrete
                 },
             };
 
-            using (var response = await client.SendAsync(request))
-            {
-                response.EnsureSuccessStatusCode();
-                var body = await response.Content.ReadFromJsonAsync<CurrencyApiResponse>();
-                return body;
-                
-            }
-            throw new NotImplementedException();
+            //using (var response = await client.SendAsync(request))
+            //{
+            //    response.EnsureSuccessStatusCode();
+            //    var body = await response.Content.ReadFromJsonAsync<CurrencyApiResponse>();
+            //    return body;
+            //    
+            //}
+            return null;
         }       
     }
 }

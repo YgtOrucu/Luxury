@@ -1,0 +1,74 @@
+﻿@model List<TopFiveDestinationsDto>
+
+<section class="destinations-section" id="destinations" aria-label="Öne Çıkan Lokasyonlar">
+    <div class="container-xl">
+ 
+        <div class="section-header text-center mb-5">
+            <p class="section-eyebrow">Keşfet</p>
+            <h2 class="section-title">Seçkin Lokasyonlar</h2>
+            <p class="section-sub">Dünyanın dört bir yanındaki en prestijli lokasyonlar</p>
+        </div>
+ 
+        @if (Model == null || !Model.Any())
+        {
+            <div class="text-center py-5">
+                <div class="alert alert-info d-inline-block px-5" role="alert">
+                    <i class="bi bi-exclamation-circle me-2"></i> Veriler şuan da alınmıyor
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="destinations-grid">
+                @{
+                    int index = 0;
+                }
+                @foreach (var item in Model)
+                {
+                    string cardSizeClass = "dest-card--small";
+                    string btnClass = "dest-btn dest-btn--sm";
+                    string btnText = "Keşfet →";
+
+                    if (index == 0)
+                    {
+                        cardSizeClass = "dest-card--large";
+                        btnClass = "dest-btn";
+                        btnText = "Keşfet <i class=\"bi bi-arrow-right\" aria-hidden=\"true\"></i>";
+                    }
+                    else if (index == 1 || index == 2)
+                    {
+                        cardSizeClass = "dest-card--medium";
+                        btnClass = "dest-btn";
+                        btnText = "Keşfet <i class=\"bi bi-arrow-right\" aria-hidden=\"true\"></i>";
+                    }
+
+                    <article class="dest-card @cardSizeClass" aria-label="@item.name destinasyon kartı">
+                        <div class="dest-img" style="background-image: url('@item.imageUrl'); background-size: cover; background-position: center;"></div>
+                        <div class="dest-overlay">
+                            <div class="dest-content">
+                                @if (index == 0)
+                                {
+                                    <p class="dest-tag">En Popüler</p>
+                                }
+                                <h3 class="dest-name">@item.name</h3>
+                                
+                                <p class="dest-country">Lokasyon</p>
+                                
+                                <div class="dest-meta">
+                                    <span><i class="bi bi-building" aria-hidden="true"></i> @item.hotelCount Otel</span>
+                                    <span><i class="bi bi-star-fill" aria-hidden="true"></i> @item.averagePrice.ToString("0.0")</span>
+                                </div>
+                                <a href="#booking-form" class="@btnClass" aria-label="@item.name otellerini ara">
+                                    @Html.Raw(btnText)
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    index++;
+                }
+            </div>
+        }
+
+    </div>
+</section>

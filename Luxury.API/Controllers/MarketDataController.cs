@@ -7,7 +7,7 @@ namespace Luxury.API.Controllers
     [ApiController]
     public class MarketDataController : ControllerBase
     {
-       private readonly IMarketDataService _marketDataService;
+        private readonly IMarketDataService _marketDataService;
 
         public MarketDataController(IMarketDataService marketDataService)
         {

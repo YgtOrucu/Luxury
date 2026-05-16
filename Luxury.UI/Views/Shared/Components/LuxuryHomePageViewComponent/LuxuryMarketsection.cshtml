@@ -10,9 +10,9 @@
         </div>
 
         <div class="row g-4" role="list" aria-label="Piyasa veri kartları">
-            @await Component.InvokeAsync("LuxuryMarketsectionCurrency", new { Model?.Currency })
-            @await Component.InvokeAsync("LuxuryMarketsectionWeather", new { Model?.Weather })
-            @await Component.InvokeAsync("LuxuryMarketsectionCoins", new { Model?.Coins })
+            @await Component.InvokeAsync("LuxuryMarketsectionCurrency", new { Currency = Model?.Currency })
+            @await Component.InvokeAsync("LuxuryMarketsectionWeather", new { Weather = Model?.Weather })
+            @await Component.InvokeAsync("LuxuryMarketsectionCoins", new { Coins = Model?.Coins })
             @await Component.InvokeAsync("LuxuryMarketsectionFuel", new { Fuel = Model?.Fuel })
         </div>
     </div>

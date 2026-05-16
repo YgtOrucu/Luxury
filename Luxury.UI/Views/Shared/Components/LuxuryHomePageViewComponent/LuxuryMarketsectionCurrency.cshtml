@@ -23,7 +23,7 @@
                         <div class="currency-info">
                             <div style="display:flex; flex-direction:column;">
                                 <span class="currency-pair">
-                                    @item.Name / TRY
+                                    @item.code / TRY
                                 </span>
 
                                 <span class="currency-desc">
@@ -35,12 +35,12 @@
                         <!-- RIGHT VALUES (Crypto style) -->
                         <div class="currency-values">
                             <span class="currency-price">
-                                @item.Price.ToString("0.00")
+                                @item.buying.ToString("0.00")
                             </span>
 
-                            <span class="currency-change @(item.ChangeRate < 0 ? "down" : "up")"
+                            <span class="currency-change @(item.changeRate < 0 ? "down" : "up")"
                                   aria-live="polite">
-                                @item.ChangeRate.ToString("0.00") %
+                                @item.changeRate.ToString("0.00") %
                             </span>
                         </div>
 

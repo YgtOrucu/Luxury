@@ -5,9 +5,9 @@ namespace Luxury.UI.ViewComponents.LuxuryHomePageViewComponent
 {
     public class LuxuryMarketsectionCurrency : ViewComponent
     {
-        public IViewComponentResult Invoke(List<CurrencyDto> currency)
+        public IViewComponentResult Invoke(List<CurrencyDto> Currency)
         {
-            return View("~/Views/Shared/Components/LuxuryHomePageViewComponent/LuxuryMarketsectionCurrency.cshtml", currency);
+            return View("~/Views/Shared/Components/LuxuryHomePageViewComponent/LuxuryMarketsectionCurrency.cshtml", Currency);
         }
     }
 }

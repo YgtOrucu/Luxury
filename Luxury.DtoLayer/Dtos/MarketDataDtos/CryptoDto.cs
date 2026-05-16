@@ -2,14 +2,14 @@
 {
     public class CryptoDto
     {
-        public string Symbol { get; set; }
+        public string symbol { get; set; }
 
-        public string Name { get; set; }
+        public string name { get; set; }
 
-        public string Image { get; set; }
+        public decimal price { get; set; }
 
-        public decimal Price { get; set; }
+        public string image { get; set; }
 
-        public decimal Change { get; set; }
+        public decimal change_24h_percent { get; set; }
     }
 }

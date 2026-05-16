@@ -18,26 +18,26 @@
                 <div class="crypto-row">
 
                     <div class="crypto-info">
-                        <img src="@coin.Image"
-                             alt="@coin.Name"
+                        <img src="@coin.image"
+                             alt="@coin.name"
                              width="24"
                              height="24"
                              style="border-radius:50%; margin-right:8px;" />
 
                         <div style="display:flex; flex-direction:column;">
-                            <span class="crypto-symbol">@coin.Symbol</span>
-                            <span class="crypto-name">@coin.Name</span>
+                            <span class="crypto-symbol">@coin.symbol</span>
+                            <span class="crypto-name">@coin.name</span>
                         </div>
                     </div>
 
                     <div class="crypto-values">
                         <span class="crypto-price">
-                            @coin.Price.ToString("N2")
+                            @coin.price.ToString("N2")
                         </span>
 
-                        <span class="crypto-change @(coin.Change < 0 ? "down" : "up")"
+                        <span class="crypto-change @(coin.change_24h_percent < 0 ? "down" : "up")"
                               aria-live="polite">
-                            @coin.Change.ToString("0.00") %
+                            @coin.change_24h_percent.ToString("0.00") %
                         </span>
                     </div>
 

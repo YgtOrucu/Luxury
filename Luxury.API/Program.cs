@@ -1,5 +1,6 @@
 using Luxury.BusinessLayer.Settings;
 using Luxury.BusinessLayer.DependencyInjection;
+using Luxury.BusinessLayer.Mapping.MapProfile;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ builder.Services.AddMemoryCache();
 builder.Services.AddBusinessLayerServices();
 builder.Services.Configure<RapidApiOptions>(builder.Configuration.GetSection("RapidApi"));
 builder.Services.AddHttpClient();
+builder.Services.AddAutoMapper(opt => opt.AddMaps(typeof(MappingProfile)));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -5,9 +5,9 @@ namespace Luxury.UI.ViewComponents.LuxuryHomePageViewComponent
 {
     public class LuxuryMarketsectionWeather : ViewComponent
     {
-        public IViewComponentResult Invoke(List<WeatherDto> weather)
+        public IViewComponentResult Invoke(List<WeatherDto> Weather)
         {
-            return View("~/Views/Shared/Components/LuxuryHomePageViewComponent/LuxuryMarketsectionWeather.cshtml", weather);
+            return View("~/Views/Shared/Components/LuxuryHomePageViewComponent/LuxuryMarketsectionWeather.cshtml", Weather);
         }
     }
 }

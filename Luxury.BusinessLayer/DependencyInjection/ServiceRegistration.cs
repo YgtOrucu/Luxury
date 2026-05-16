@@ -12,6 +12,8 @@ namespace Luxury.BusinessLayer.DependencyInjection
             services.AddScoped<IMarkerDataCurrencyService, MarkerDataCurrencyService>();
             services.AddScoped<IMarkerDataCoinService, MarkerDataCoinService>();
             services.AddScoped<IMarkerDataFuelService, MarkerDataFuelService>();
+            services.AddScoped<IMarkerDataWeatherService, MarkerDataWeatherService>();
+            services.AddScoped<ITopFiveDestinationsService, TopFiveDestinationsService>();
 
             return services;
         }

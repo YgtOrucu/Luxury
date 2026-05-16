@@ -1179,7 +1179,7 @@ input[type="date"].form-control-luxury::-webkit-calendar-picker-indicator {
 }
 
 /* ==============================================
-   DESTINATIONS SECTION
+   DESTINATIONS SECTION (OPTIMIZED & DYNAMIC)
    ============================================== */
 .destinations-section {
     padding: var(--section-py) 0;
@@ -1203,6 +1203,7 @@ input[type="date"].form-control-luxury::-webkit-calendar-picker-indicator {
     grid-row: span 2;
 }
 
+/* Modifiers artik sadece grid boyutunu yonettigi icin icleri bos kalabilir veya silinebilir */
 .dest-card--medium {
 }
 
@@ -1212,6 +1213,8 @@ input[type="date"].form-control-luxury::-webkit-calendar-picker-indicator {
 .dest-img {
     position: absolute;
     inset: 0;
+    width: 100%; /* Resmin div'i tamamen kaplamasi icin eklendi */
+    height: 100%;
     background-size: cover;
     background-position: center;
     transition: transform 0.7s var(--transition-slow);
@@ -1221,26 +1224,8 @@ input[type="date"].form-control-luxury::-webkit-calendar-picker-indicator {
     transform: scale(1.07);
 }
 
-.dest-img--paris {
-    background: url(https://www.mngturizm.com/upload/blog/paris-te-gezilecek-yerler/paris-1-2.jpg);
-}
-
-.dest-img--dubai {
-    background: url(https://www.shutterstock.com/image-photo/dubai-uae-04-18-2022-260nw-2521772521.jpg);
-}
-
-.dest-img--santorini {
-    background: url(https://www.shutterstock.com/image-photo/white-buildings-church-santorini-blue-260nw-2404340973.jpg);
-}
-
-.dest-img--tokyo {
-    background: url(https://www.shutterstock.com/image-photo/night-life-small-street-tokyo-260nw-1183839637.jpg);
-}
-
-.dest-img--maldives {
-    background: url(https://www.shutterstock.com/image-photo/aerial-drone-shot-captures-narrow-260nw-2692299557.jpg);
-    background-size: cover;
-}
+/* --- KRİTİK: GEREKSİZ STATIK RESIM CLASS'LARI SİLİNDİ ---
+   (.dest-img--paris, --dubai, --santorini vb. artik HTML'den dinamik geliyor) */
 
 .dest-overlay {
     position: absolute;
@@ -1326,6 +1311,9 @@ input[type="date"].form-control-luxury::-webkit-calendar-picker-indicator {
     padding: 7px 14px;
 }
 
+/* ==============================================
+   RESPONSIVE MEDIA QUERIES (KORUNDU)
+   ============================================== */
 @media (max-width: 1023px) {
     .destinations-grid {
         grid-template-columns: 1fr 1fr;

@@ -26,7 +26,7 @@
                         <span>Benzin 95</span>
                     </div>
                     <span class="fuel-price">
-                        @(Model.Gasoline95 == 0 ? "Yükleniyor..." : Model.Gasoline95.ToString("N2") + " TL")
+                        @(Model.gasoline == 0 ? "Yükleniyor..." : Model.gasoline.ToString("N2") + " TL")
                     </span>
                 </div>
 
@@ -36,7 +36,7 @@
                         <span>Motorin</span>
                     </div>
                     <span class="fuel-price">
-                        @(Model.Diesel == 0 ? "Yükleniyor..." : Model.Diesel.ToString("N2") + " TL")
+                        @(Model.diesel == 0 ? "Yükleniyor..." : Model.diesel.ToString("N2") + " TL")
                     </span>
                 </div>
 
@@ -46,7 +46,7 @@
                         <span>Gaz</span>
                     </div>
                     <span class="fuel-price">
-                        @(Model.Lpg == 0 ? "Yükleniyor..." : Model.Lpg.ToString("N2") + " TL")
+                        @(Model.lpg == 0 ? "Yükleniyor..." : Model.lpg.ToString("N2") + " TL")
                     </span>
                 </div>
             }

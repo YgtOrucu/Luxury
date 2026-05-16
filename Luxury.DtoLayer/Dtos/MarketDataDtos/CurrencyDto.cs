@@ -2,9 +2,9 @@
 {
     public class CurrencyDto
     {
-        public string Name { get; set; }
+        public string code { get; set; }
         public string ShortName { get; set; }
-        public float Price { get; set; }
-        public float ChangeRate { get; set; }
+        public float buying { get; set; }
+        public float changeRate { get; set; }
     }
 }
