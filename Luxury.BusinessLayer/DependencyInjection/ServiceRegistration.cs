@@ -8,12 +8,13 @@ namespace Luxury.BusinessLayer.DependencyInjection
     {
         public static IServiceCollection AddBusinessLayerServices(this IServiceCollection services)
         {
-            services.AddScoped<IMarketDataService, MarketDataService>();
-            services.AddScoped<IMarkerDataCurrencyService, MarkerDataCurrencyService>();
-            services.AddScoped<IMarkerDataCoinService, MarkerDataCoinService>();
-            services.AddScoped<IMarkerDataFuelService, MarkerDataFuelService>();
-            services.AddScoped<IMarkerDataWeatherService, MarkerDataWeatherService>();
-            services.AddScoped<ITopFiveDestinationsService, TopFiveDestinationsService>();
+            services.AddScoped<IMarketDataService, MarketDataManager>();
+            services.AddScoped<IMarkerDataCurrencyService, MarkerDataCurrencyManager>();
+            services.AddScoped<IMarkerDataCoinService, MarkerDataCoinManager>();
+            services.AddScoped<IMarkerDataFuelService, MarkerDataFuelManager>();
+            services.AddScoped<IMarkerDataWeatherService, MarkerDataWeatherManager>();
+            services.AddScoped<ITopFiveDestinationsService, TopFiveDestinationsManager>();
+            services.AddScoped<IHotelSearchService,HotelSearchManager>();
 
             return services;
         }

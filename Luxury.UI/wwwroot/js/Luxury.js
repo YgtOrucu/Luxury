@@ -79,9 +79,9 @@ function el(id) {
 (function initSearchForm() {
     const form = el('hotelSearchForm');
     const errorMsg = el('formError');
-    const checkIn = el('checkIn');
+    const checkIn = el('CheckIn');
     const checkOut = el('checkOut');
-    const cityInput = el('city');
+    const cityInput = el('City');
 
     if (!form) return;
 

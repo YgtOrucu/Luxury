@@ -6,42 +6,38 @@ using System.Net.Http.Json;
 
 namespace Luxury.BusinessLayer.Concrete
 {
-    public class MarkerDataCoinService : IMarkerDataCoinService
+    public class MarkerDataFuelManager : IMarkerDataFuelService
     {
         private readonly RapidApiOptions _options;
         private readonly HttpClient _httpClient;
-
-        public MarkerDataCoinService(IOptions<RapidApiOptions> options, HttpClient httpClient)
+        public MarkerDataFuelManager(IOptions<RapidApiOptions> options, HttpClient httpClient)
         {
             _options = options.Value;
             _httpClient = httpClient;
         }
 
-        public async Task<CryptoApiResponse> GetApiResponseAsync()
+        public async Task<FuelApiResponse> GetFuelPrices()
         {
-            var baseUrl = _options.Services.Crypto.BaseUrl;
-            var endpoint = _options.Services.Crypto.Endpoints.MiniPrices;
+            var baseurl = _options.Services.Fuel.BaseUrl;
+            var endpoint = _options.Services.Fuel.Endpoints.EuropaCountry;
             var client = _httpClient;
-
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri($"{baseUrl}{endpoint}?base_currency=TRY&page=1&page_size=10"),
+                RequestUri = new Uri($"{baseurl}{endpoint}"),
                 Headers =
                 {
                     { "x-rapidapi-key", _options.ApiKey },
-                    { "x-rapidapi-host", _options.Services.Crypto.Host },
+                    { "x-rapidapi-host", _options.Services.Fuel.Host },
                 },
             };
-
             //using (var response = await client.SendAsync(request))
             //{
             //    response.EnsureSuccessStatusCode();
-            //    var body = await response.Content.ReadFromJsonAsync<CryptoApiResponse>();
+            //    var body = await response.Content.ReadFromJsonAsync<FuelApiResponse>();
             //    return body;
             //}
             return null;
-
         }
     }
 }

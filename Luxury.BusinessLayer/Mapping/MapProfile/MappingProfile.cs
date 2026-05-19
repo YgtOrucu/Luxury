@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Luxury.BusinessLayer.Models.RapidApi;
+using Luxury.DtoLayer.Dtos.HotelSearchDtos;
 using Luxury.DtoLayer.Dtos.MarketDataDtos;
+using Luxury.DtoLayer.Dtos.TopFiveDestinationDto;
 
 
 namespace Luxury.BusinessLayer.Mapping.MapProfile
@@ -25,13 +27,20 @@ namespace Luxury.BusinessLayer.Mapping.MapProfile
                 .ForMember(dest => dest.Humidity, opt => opt.MapFrom(src => src.main.humidity))
                 .ForMember(dest => dest.Wind, opt => opt.MapFrom(src => (int)src.wind.speed))
                 .ForMember(dest => dest.Icon, opt => opt.MapFrom(src => src.weather[0].main))
-                .ForMember(dest => dest.WeatherIcon, opt => opt.MapFrom(src =>src.weather != null && src.weather.Count > 0 ? 
+                .ForMember(dest => dest.WeatherIcon, opt => opt.MapFrom(src => src.weather != null && src.weather.Count > 0 ?
                 GetEmojiIcon(src.weather[0].main) : "🌍"));
 
 
             CreateMap<Destination, TopFiveDestinationsDto>()
                .ForMember(dest => dest.averagePrice, opt => opt.MapFrom(src =>
                 src.averagePrice > 0 ? Math.Round((src.averagePrice / 500) * 5, 1) : 0));
+
+            CreateMap<AllHotel, ResultHotelDto>()
+                .ForMember(desc => desc.MainPhotoUrl, opt => opt.MapFrom(src => (src.photoUrls != null && src.photoUrls.Length > 0 && !string.IsNullOrEmpty(src.photoUrls[0]))
+                           ? src.photoUrls[0].Replace("square60", "max430")
+                           : null))
+                .ForMember(desc => desc.AmountRounded, opt => opt.MapFrom(src => src.priceBreakdown.grossPrice.amountRounded))
+                .ForMember(desc => desc.ReviewScore, opt => opt.MapFrom(src => src.reviewScore.ToString("0.0")));
 
         }
         private string GetEmojiIcon(string weatherMain)

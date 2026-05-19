@@ -21,15 +21,5 @@
         public float averagePrice { get; set; }
         public int hotelCount { get; set; }
     }
-
-
-
-
-    //DESTİNATION
-    //name:"Punta Cana"
-    //imageUrl:"https://imgcy.trivago.com/c_fill,d_dummy.jpeg,e_sharpen:60,f_auto,h_258,q_auto,w_258/categoryimages/73/65/73652_v67.jpeg"
-    //averagePrice:311.79825846
-    //hotelCount:1296
-
 }
 

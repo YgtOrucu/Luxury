@@ -1,4 +1,4 @@
-﻿namespace Luxury.DtoLayer.Dtos.MarketDataDtos
+﻿namespace Luxury.DtoLayer.Dtos.TopFiveDestinationDto
 {
     public class TopFiveDestinationsDto
     {

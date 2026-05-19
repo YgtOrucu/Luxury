@@ -6,42 +6,42 @@ using System.Net.Http.Json;
 
 namespace Luxury.BusinessLayer.Concrete
 {
-    public class MarkerDataWeatherService : IMarkerDataWeatherService
+    public class MarkerDataCoinManager : IMarkerDataCoinService
     {
         private readonly RapidApiOptions _options;
         private readonly HttpClient _httpClient;
 
-        public MarkerDataWeatherService(IOptions<RapidApiOptions> options, HttpClient httpClient)
+        public MarkerDataCoinManager(IOptions<RapidApiOptions> options, HttpClient httpClient)
         {
             _options = options.Value;
             _httpClient = httpClient;
         }
 
-        public async Task<WeatherApiResponse> GetWeatherData(string city, string lang)
+        public async Task<CryptoApiResponse> GetApiResponseAsync()
         {
-            var baseUrl = _options.Services.Weather.BaseUrl;
-            var endpoint = _options.Services.Weather.Endpoints.City;
+            var baseUrl = _options.Services.Crypto.BaseUrl;
+            var endpoint = _options.Services.Crypto.Endpoints.MiniPrices;
             var client = _httpClient;
 
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri($"{baseUrl}{endpoint}?city={city}&lang={lang}"),
+                RequestUri = new Uri($"{baseUrl}{endpoint}?base_currency=TRY&page=1&page_size=10"),
                 Headers =
                 {
                     { "x-rapidapi-key", _options.ApiKey },
-                    { "x-rapidapi-host", _options.Services.Weather.Host },
+                    { "x-rapidapi-host", _options.Services.Crypto.Host },
                 },
             };
 
             //using (var response = await client.SendAsync(request))
             //{
             //    response.EnsureSuccessStatusCode();
-            //    var body = await response.Content.ReadFromJsonAsync<WeatherApiResponse>();
+            //    var body = await response.Content.ReadFromJsonAsync<CryptoApiResponse>();
             //    return body;
-            //    
             //}
             return null;
-        }       
+
+        }
     }
 }

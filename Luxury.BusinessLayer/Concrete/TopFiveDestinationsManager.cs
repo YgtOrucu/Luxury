@@ -1,19 +1,17 @@
-﻿using AutoMapper;
-using Luxury.BusinessLayer.Abstract;
+﻿using Luxury.BusinessLayer.Abstract;
 using Luxury.BusinessLayer.Models.RapidApi;
 using Luxury.BusinessLayer.Settings;
-using Luxury.DtoLayer.Dtos.MarketDataDtos;
 using Microsoft.Extensions.Options;
 using System.Net.Http.Json;
 
 namespace Luxury.BusinessLayer.Concrete
 {
-    public class TopFiveDestinationsService : ITopFiveDestinationsService
+    public class TopFiveDestinationsManager : ITopFiveDestinationsService
     {
         private readonly HttpClient _httpClient;
         private readonly RapidApiOptions _options;
 
-        public TopFiveDestinationsService(HttpClient httpClient, IOptions<RapidApiOptions> options)
+        public TopFiveDestinationsManager(HttpClient httpClient, IOptions<RapidApiOptions> options)
         {
             _httpClient = httpClient;
             _options = options.Value;

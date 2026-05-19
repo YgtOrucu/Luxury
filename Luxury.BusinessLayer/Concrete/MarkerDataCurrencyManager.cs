@@ -6,38 +6,43 @@ using System.Net.Http.Json;
 
 namespace Luxury.BusinessLayer.Concrete
 {
-    public class MarkerDataFuelService : IMarkerDataFuelService
+    public class MarkerDataCurrencyManager : IMarkerDataCurrencyService
     {
         private readonly RapidApiOptions _options;
         private readonly HttpClient _httpClient;
-        public MarkerDataFuelService(IOptions<RapidApiOptions> options, HttpClient httpClient)
+
+        public MarkerDataCurrencyManager(IOptions<RapidApiOptions> options, HttpClient httpClient)
         {
             _options = options.Value;
             _httpClient = httpClient;
         }
 
-        public async Task<FuelApiResponse> GetFuelPrices()
+        public async Task<CurrencyApiResponse> GetCurrencyRate()
         {
-            var baseurl = _options.Services.Fuel.BaseUrl;
-            var endpoint = _options.Services.Fuel.Endpoints.EuropaCountry;
+
+            var baseUrl = _options.Services.Currency.BaseUrl;
+            var endpoint = _options.Services.Currency.Endpoints.ExchangeRate;
             var client = _httpClient;
+
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri($"{baseurl}{endpoint}"),
+                RequestUri = new Uri($"{baseUrl}{endpoint}?code=USD%2CEUR%2CGBP%2CCHF%2CSAR%2CAED%2CJPY%2CCNY%2CRUB%2CINR"),
                 Headers =
                 {
                     { "x-rapidapi-key", _options.ApiKey },
-                    { "x-rapidapi-host", _options.Services.Fuel.Host },
+                    { "x-rapidapi-host", _options.Services.Currency.Host },
                 },
             };
+
             //using (var response = await client.SendAsync(request))
             //{
             //    response.EnsureSuccessStatusCode();
-            //    var body = await response.Content.ReadFromJsonAsync<FuelApiResponse>();
+            //    var body = await response.Content.ReadFromJsonAsync<CurrencyApiResponse>();
             //    return body;
+            //    
             //}
             return null;
-        }
+        }       
     }
 }

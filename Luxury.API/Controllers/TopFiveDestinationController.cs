@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Luxury.BusinessLayer.Abstract;
-using Luxury.DtoLayer.Dtos.MarketDataDtos;
+using Luxury.DtoLayer.Dtos.TopFiveDestinationDto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Luxury.API.Controllers

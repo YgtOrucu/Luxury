@@ -1,4 +1,4 @@
-﻿using Luxury.DtoLayer.Dtos.MarketDataDtos;
+﻿using Luxury.DtoLayer.Dtos.TopFiveDestinationDto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Luxury.UI.ViewComponents.LuxuryHomePageViewComponent

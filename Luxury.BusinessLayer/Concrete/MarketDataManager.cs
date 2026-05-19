@@ -4,14 +4,14 @@ using Luxury.DtoLayer.Dtos.MarketDataDtos;
 
 namespace Luxury.BusinessLayer.Concrete
 {
-    public class MarketDataService : IMarketDataService
+    public class MarketDataManager : IMarketDataService
     {
         private readonly IMarkerDataCurrencyService _currencyService;
         private readonly IMarkerDataCoinService _coinService;
         private readonly IMarkerDataFuelService _fuelService;
         private readonly IMarkerDataWeatherService _weatherService;
         private readonly IMapper _mapper;
-        public MarketDataService(
+        public MarketDataManager(
             IMarkerDataCurrencyService currencyService,
             IMarkerDataCoinService coinService,
             IMarkerDataFuelService fuelService,
