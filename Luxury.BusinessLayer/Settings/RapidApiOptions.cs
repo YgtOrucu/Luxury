@@ -15,6 +15,7 @@
         public ApiService TopFiveDestinations { get; set; }
         public ApiService GetIdByCityName { get; set; }
         public ApiService GetHotelByParameters { get; set; }
+        public ApiService GetHotelDetailsById { get; set; }
     }
 
     public class ApiService
@@ -33,5 +34,6 @@
         public string TopDestination { get; set; }
         public string GetDestination { get; set; }
         public string GetAllHotelByParameters { get; set; }
+        public string GetHotelDetailById { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Luxury.DtoLayer.Dtos.HotelSearchDtos;
+﻿using Humanizer;
+using Luxury.DtoLayer.Dtos.HotelSearchDtos;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
@@ -96,6 +97,51 @@ namespace Luxury.UI.Controllers
                 }
 
             }
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id, string checkInDate, string checkOutDate, int rooms, 
+            int adults, int children, string units, string currencyCode, string language)
+        {
+            int DefaultAge = 1;
+            var agesList = Enumerable.Repeat(DefaultAge, children);
+            string childrenParam = string.Join(",", agesList);
+
+            var queryParams = new List<string>
+                {
+                    $"hotelId={id}",
+                    $"checkInDate={checkInDate}",
+                    $"checkOutDate={checkOutDate}",
+                    $"rooms={rooms}",
+                    $"adults={adults}",
+                    $"units={units}",
+                    $"currencyCode={currencyCode}",
+                    $"language={language}"
+                };
+
+            if (!string.IsNullOrWhiteSpace(childrenParam))
+            {
+                queryParams.Add($"children={childrenParam.Trim()}");
+            }
+
+            var requestUrl = $"HotelSearch/GetHotelDetailById?{string.Join("&", queryParams)}";
+
+            var client = _httpClientFactory.CreateClient("LuxuryApi");
+            var responseGetHotelDetails = await client.GetAsync(requestUrl);
+
+
+            if (responseGetHotelDetails.IsSuccessStatusCode)
+            {
+                var values = new HotelDetailDto();
+
+                if (responseGetHotelDetails.StatusCode != System.Net.HttpStatusCode.NoContent)
+                {
+                    values = await responseGetHotelDetails.Content.ReadFromJsonAsync<HotelDetailDto>() ?? new HotelDetailDto();
+                }
+                return View(values);
+            }
+            var x = responseGetHotelDetails.Content.ReadAsStringAsync();
             return View();
         }
     }

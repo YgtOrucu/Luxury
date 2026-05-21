@@ -16,7 +16,7 @@
         @await Component.InvokeAsync("LuxuryHotelListNavbar")
         @await Component.InvokeAsync("LuxuryHotelListBooking", new { firstHotel = firstHotel, adults = ViewBag.Adults, rooms = ViewBag.Rooms, children = ViewBag.Children })
         @await Component.InvokeAsync("LuxuryHotelListSkeletonContainer", new { firstHotel = firstHotel, ModelCount = Model?.Count })
-        @await Component.InvokeAsync("LuxuryHotelListAllHotels", new { AllHotel = Model })
+        @await Component.InvokeAsync("LuxuryHotelListAllHotels", new { AllHotel = Model, adults = ViewBag.Adults, rooms = ViewBag.Rooms, children = ViewBag.Children })
     </div>
 
     @await Component.InvokeAsync("LuxuryHotelListFooter")

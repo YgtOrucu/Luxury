@@ -45,10 +45,23 @@
                                         <span class="price-lbl">TOPLAM TUTAR</span>
                                         <span class="price-amount">@hotel.AmountRounded</span>
                                     </div>
-                                    <a href="/Hotel/Details/@hotel.Id" class="btn-luxury mt-3 w-100 text-center">
-                                        <span>Detayları İncele</span>
-                                        <i class="bi bi-arrow-right ms-2"></i>
-                                    </a>
+                                    <form action="/Hotel/Details" method="get">
+                                        <input type="hidden" name="id" value="@hotel.Id" />
+
+                                        <input type="hidden" name="checkInDate" value="@hotel.CheckinDate" />
+                                        <input type="hidden" name="checkOutDate" value="@hotel.CheckoutDate" />
+                                        <input type="hidden" name="rooms" value="@ViewBag.Rooms" />
+                                        <input type="hidden" name="adults" value="@ViewBag.Adults" />
+                                        <input type="hidden" name="children" value="@ViewBag.Children" />
+                                        <input type="hidden" name="units" value="@hotel.Units" />
+                                        <input type="hidden" name="currencyCode" value="@hotel.CurrencyCode" />
+                                        <input type="hidden" name="language" value="@hotel.Language" />
+
+                                        <button type="submit" class="btn-luxury mt-3 w-100 text-center">
+                                            <span>Detayları İncele</span>
+                                            <i class="bi bi-arrow-right ms-2"></i>
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

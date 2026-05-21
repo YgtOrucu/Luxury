@@ -13,5 +13,8 @@
         public string CheckoutDate { get; set; }
         public string AmountRounded { get; set; }
         public string WishlistName { get; set; }
+        public string Units { get; set; } = "metric";
+        public string CurrencyCode { get; set; } = "TRY";
+        public string Language { get; set; } = "tr-tr";
     }
 }
