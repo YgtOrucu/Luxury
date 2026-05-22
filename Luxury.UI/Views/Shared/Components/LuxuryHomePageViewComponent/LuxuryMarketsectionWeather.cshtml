@@ -16,16 +16,16 @@
             <div class="weather-card">
 
                 <div class="weather-header">
-                    <span class="weather-city">@item?.City ?? ""</span>
+                    <span class="weather-city">@(item?.City ?? "")</span>
                 </div>
 
                 <div class="weather-main">
                     <div class="weather-icon-large">
-                        @item?.WeatherIcon ?? ""
+                        @(item?.WeatherIcon ?? "")
                     </div>
 
                     <div class="weather-temp-block">
-                        <span class="weather-temp">@item?.Temp ?? ""°C</span>
+                        <span class="weather-temp">@(item?.Temp ?? 0)°C</span>
                         <span class="weather-desc">Hava sıcaklığı</span>
                     </div>
                 </div>
@@ -33,17 +33,17 @@
                 <div class="weather-details">
                     <div class="weather-detail-item">
                         <i class="bi bi-droplet"></i>
-                        <span>%@item?.Humidity ?? ""</span>
+                        <span>%@(item?.Humidity ?? 0)</span>
                     </div>
 
                     <div class="weather-detail-item">
                         <i class="bi bi-wind"></i>
-                        <span>@item?.Wind ?? "" km/s</span>
+                        <span>@(item?.Wind ?? 0)km/s</span>
                     </div>
 
                     <div class="weather-detail-item">
                         <i class="bi bi-eye"></i>
-                        <span>@item?.Visibility ?? "" km</span>
+                        <span>@(item?.Visibility ?? 0) km</span>
                     </div>
                 </div>
 

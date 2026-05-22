@@ -41,7 +41,7 @@ namespace Luxury.API.Controllers
            int adults, string units, string currencyCode, string language, string? children = null)
         {
             var values = await _hotelservice.GetHotelDetailsById(hotelId, checkInDate, checkOutDate, rooms, adults, units, currencyCode, language, children);
-            if (values != null)
+             if (values != null)
                 return Ok(_mapper.Map<HotelDetailDto>(values.data));
             return Ok(null);
         }

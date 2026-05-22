@@ -1,117 +1,68 @@
 ﻿
-(function () {
-    'use strict';
+    // ── Navbar scroll effect ──────────────────────────────────────
+    const mainNav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+        mainNav.classList.toggle('scrolled', window.scrollY > 60);
+    }, {passive: true });
 
-    /* ── Navbar scroll state ── */
-    var nav = document.getElementById('mainNav');
-    function updateNav() {
-        nav.classList.toggle('nav-scrolled', window.scrollY > 50);
-    }
-    window.addEventListener('scroll', updateNav, { passive: true });
-    updateNav();
+    // ── Back to top ───────────────────────────────────────────────
+    const btt = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+        btt.classList.toggle('visible', window.scrollY > 400);
+    }, {passive: true });
+    btt.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth' }));
 
-    /* ── Back-to-top toggle ── */
-    var backBtn = document.getElementById('backToTop');
-    window.addEventListener('scroll', function () {
-        backBtn.classList.toggle('show', window.scrollY > 400);
-    }, { passive: true });
-    backBtn.addEventListener('click', function () {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    /* ── Smooth scroll for all anchor links ── */
-    document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-        anchor.addEventListener('click', function (e) {
-            var targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            var target = document.querySelector(targetId);
-            if (target) {
-                e.preventDefault();
-                var navH = nav ? nav.offsetHeight : 72;
-                window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - navH - 16, behavior: 'smooth' });
+    // ── Fade-up IntersectionObserver ──────────────────────────────
+    const fuEls = document.querySelectorAll('.fade-up');
+    const fuObserver = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                fuObserver.unobserve(e.target);
             }
         });
-    });
+    }, {threshold: 0.12 });
+    fuEls.forEach(el => fuObserver.observe(el));
 
-    /* ── Hero background slideshow ── */
-    var heroBg = document.getElementById('heroBg');
-    if (heroBg) {
-        var slides = heroBg.querySelectorAll('img');
-        if (slides.length > 1) {
-            var currentSlide = 0;
-            setInterval(function () {
-                slides[currentSlide].classList.remove('active');
-                currentSlide = (currentSlide + 1) % slides.length;
-                slides[currentSlide].classList.add('active');
-            }, 4500);
+    // ── Hero slider ───────────────────────────────────────────────
+    (function () {
+        const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.hero-dot');
+    if (!slides.length) return;
+    let current = 0, timer;
+    function goTo(idx) {
+        slides[current].classList.remove('active');
+    dots[current]?.classList.remove('active');
+    current = (idx + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current]?.classList.add('active');
         }
+    function next() {goTo(current + 1); }
+    function startAuto() {timer = setInterval(next, 5000); }
+    function stopAuto() {clearInterval(timer); }
+        dots.forEach((d, i) => d.addEventListener('click', () => {stopAuto(); goTo(i); startAuto(); }));
+    startAuto();
+    })();
+
+    // ── Room gallery slider ───────────────────────────────────────
+    var roomStates = { };
+    function slideRoom(idx, dir) {
+        var inner = document.getElementById('roomGallery_' + idx);
+    if (!inner) return;
+    var photos = inner.querySelectorAll('.room-photo');
+    if (!photos.length) return;
+    if (!roomStates[idx]) roomStates[idx] = 0;
+    roomStates[idx] = (roomStates[idx] + dir + photos.length) % photos.length;
+    inner.style.transform = 'translateX(-' + (roomStates[idx] * 100) + '%)';
+    var counter = document.getElementById('roomCount_' + idx);
+    if (counter) counter.textContent = (roomStates[idx] + 1) + ' / ' + photos.length;
     }
 
-    /* ─────────────────────────────────────────────
-   Gallery thumbnail interaction
-───────────────────────────────────────────── */
-    var galleryMain = document.getElementById('galleryMain');
-    var thumbsContainer = document.getElementById('galleryThumbs');
-    var currentPhotoNum = document.getElementById('currentPhotoNum');
-
-    if (galleryMain && thumbsContainer) {
-        if (galleryMain.src.includes('max300')) {
-            galleryMain.src = galleryMain.src.replace('max300', 'max700');
-        }
-
-        thumbsContainer.querySelectorAll('.gallery-thumb').forEach(function (thumb, idx) {
-            function selectThumb() {
-                var originalSrc = thumb.src;
-
-                var highResSrc = originalSrc.includes('max300')
-                    ? originalSrc.replace('max300', 'max700')
-                    : originalSrc;
-
-                galleryMain.src = highResSrc;
-                galleryMain.alt = thumb.alt;
-
-                thumbsContainer.querySelectorAll('.gallery-thumb').forEach(function (t) {
-                    t.classList.remove('active');
-                });
-                thumb.classList.add('active');
-                if (currentPhotoNum) currentPhotoNum.textContent = idx + 1;
-            }
-
-            thumb.addEventListener('click', selectThumb);
-
-            thumb.addEventListener('keydown', function (e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    selectThumb();
-                }
-            });
-        });
+    // ── Room policy toggle ────────────────────────────────────────
+    function togglePolicy(btn) {
+        var body = btn.nextElementSibling;
+    var open = body.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+    var icon = btn.querySelector('.bi-chevron-down, .bi-chevron-up');
+    if (icon) icon.className = open ? 'bi bi-chevron-up ms-auto' : 'bi bi-chevron-down ms-auto';
     }
-
-})();
-
-/* ── Currency tab switcher (price card) ── */
-function switchCurrency(type) {
-    var panelOriginal = document.getElementById('panel-original');
-    var panelTry = document.getElementById('panel-try');
-    var tabOriginal = document.getElementById('tab-original');
-    var tabTry = document.getElementById('tab-try');
-
-    if (!panelOriginal || !panelTry) return;
-
-    if (type === 'try') {
-        panelOriginal.style.display = 'none';
-        panelTry.style.display = '';
-        tabTry.classList.add('active');
-        tabTry.setAttribute('aria-selected', 'true');
-        tabOriginal.classList.remove('active');
-        tabOriginal.setAttribute('aria-selected', 'false');
-    } else {
-        panelTry.style.display = 'none';
-        panelOriginal.style.display = '';
-        tabOriginal.classList.add('active');
-        tabOriginal.setAttribute('aria-selected', 'true');
-        tabTry.classList.remove('active');
-        tabTry.setAttribute('aria-selected', 'false');
-    }
-}

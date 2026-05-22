@@ -15,13 +15,13 @@ namespace Luxury.BusinessLayer.Concrete
             IMarkerDataCurrencyService currencyService,
             IMarkerDataCoinService coinService,
             IMarkerDataFuelService fuelService,
-            IMarkerDataWeatherService weatherService,  
+            IMarkerDataWeatherService weatherService,
             IMapper mapper)
         {
             _currencyService = currencyService;
             _coinService = coinService;
             _fuelService = fuelService;
-            _weatherService = weatherService; 
+            _weatherService = weatherService;
             _mapper = mapper;
         }
 
@@ -56,7 +56,7 @@ namespace Luxury.BusinessLayer.Concrete
 
             /*Fuel API RAPIDAPI*/
             var fuelresponse = await _fuelService.GetFuelPrices();
-            var fuel = fuelresponse != null ? _mapper.Map<FuelDto>(fuelresponse.result.Where(x => x.country == "Turkey")) : null;
+            var fuel = fuelresponse != null ? _mapper.Map<FuelDto>(fuelresponse.result.FirstOrDefault(x => x.country == "Turkey")) : null;
             /*Fuel API RAPIDAPI*/
 
             /*----------------------------------------*/

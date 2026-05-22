@@ -21,6 +21,7 @@ namespace Luxury.UI.ViewComponents.LuxuryHomePageViewComponent
               var values = await response.Content.ReadFromJsonAsync<MarketDataDto>();
               return View("~/Views/Shared/Components/LuxuryHomePageViewComponent/LuxuryMarketsection.cshtml", values);
             }
+            var x = response.Content.ReadAsStringAsync();
             return View("~/Views/Shared/Components/LuxuryHomePageViewComponent/LuxuryMarketsection.cshtml");
         }
     }

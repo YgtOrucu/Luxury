@@ -1,7 +1,6 @@
 ﻿using Luxury.BusinessLayer.Abstract;
 using Luxury.BusinessLayer.Models.RapidApi;
 using Luxury.BusinessLayer.Settings;
-using Luxury.DtoLayer.Dtos.HotelSearchDtos;
 using Microsoft.Extensions.Options;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -53,55 +52,6 @@ namespace Luxury.BusinessLayer.Concrete
                 if (body != null) return body;
                 return null;
             }
-
-
-            //var mockResponse = new GetHotelByParametersApiResponse
-            //{
-            //    data = new AllHotel[]
-            //    {
-            //        new AllHotel
-            //        {
-            //            id = 9225954,
-            //            name = "Hilton Garden Inn Paris La Villette",
-            //            propertyClass = 4,
-            //            reviewCount = 826,
-            //            reviewScore = 8.5f,
-            //            reviewScoreWord = "Çok İyi",
-            //            wishlistName = "Paris",
-            //            checkinDate = checkIn,
-            //            checkoutDate = checkOut,
-            //            photoUrls = new string[] { "https://cf.bstatic.com/xdata/images/hotel/max430/753532290.jpg?k=5df1045ce999e9bfd89e9406a7879f8ac37e409458c8fe893ec34e423af862fc&o=" },
-            //            priceBreakdown = new Pricebreakdown
-            //            {
-            //                grossPrice = new Grossprice
-            //                {
-            //                    amountRounded = "TL 116.359"
-            //                }
-            //            }
-            //        },
-            //         new AllHotel
-            //        {
-            //            id = 57218,
-            //            name = "Novotel Paris 14 Porte d'Orléans",
-            //            propertyClass = 4,
-            //            reviewCount = 3834,
-            //            reviewScore = 8.2f,
-            //            reviewScoreWord = "Çok İyi",
-            //            wishlistName = "Paris",
-            //            checkinDate = checkIn,
-            //            checkoutDate = checkOut,
-            //            photoUrls = new string[] { "https://cf.bstatic.com/xdata/images/hotel/max430/870663839.jpg?k=ace534c7f65820df0d4008582a2ef9531cdcd1918776fc828e8e3d64218db0f7&o=" },
-            //            priceBreakdown = new Pricebreakdown
-            //            {
-            //                grossPrice = new Grossprice
-            //                {
-            //                    amountRounded = "TL 112.958"
-            //                }
-            //            }
-            //        },
-            //    }
-            //};
-            //return mockResponse;
         }
 
 
@@ -120,15 +70,14 @@ namespace Luxury.BusinessLayer.Concrete
                     { "x-rapidapi-host", _options.Services.GetIdByCityName.Host },
                 },
             };
-            //using (var response = await client.SendAsync(request))
-            //{
-            //    response.EnsureSuccessStatusCode();
-            //    var body = await response.Content.ReadFromJsonAsync<GetTheIdOfTheCityApiResponse>();
-            //    var id = body.data.FirstOrDefault().id;
-            //    if (id != null) return id;
-            //    return null;
-            //}
-            return "eyJjaXR5X25hbWUiOiJQYXJpcyIsImNvdW50cnkiOiJGcmFuY2UiLCJkZXN0X2lkIjoiLTE0NTY5MjgiLCJkZXN0X3R5cGUiOiJjaXR5In0=";
+            using (var response = await client.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+                var body = await response.Content.ReadFromJsonAsync<GetTheIdOfTheCityApiResponse>();
+                var id = body.data.FirstOrDefault().id;
+                if (id != null) return id;
+                return null;
+            }
         }
 
         public async Task<GetHotelDetailByIdApiResponse> GetHotelDetailsById(int hotelId, string checkInDate, string checkOutDate, int rooms, 
@@ -165,7 +114,6 @@ namespace Luxury.BusinessLayer.Concrete
                 {
                     PropertyNameCaseInsensitive = true
                 };
-
                 var body = await response.Content.ReadFromJsonAsync<GetHotelDetailByIdApiResponse>(options);
                 if (body != null) return body;
                 return null;

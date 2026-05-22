@@ -34,14 +34,12 @@ namespace Luxury.BusinessLayer.Concrete
                 },
             };
 
-            //using (var response = await client.SendAsync(request))
-            //{
-            //    response.EnsureSuccessStatusCode();
-            //    var body = await response.Content.ReadFromJsonAsync<CryptoApiResponse>();
-            //    return body;
-            //}
-            return null;
-
+            using (var response = await client.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+                var body = await response.Content.ReadFromJsonAsync<CryptoApiResponse>();
+                return body;
+            }
         }
     }
 }

@@ -32,13 +32,12 @@ namespace Luxury.BusinessLayer.Concrete
                     { "x-rapidapi-host", _options.Services.TopFiveDestinations.Host },
                 },
             };
-            //using (var response = await client.SendAsync(request))
-            //{
-            //    response.EnsureSuccessStatusCode();
-            //    var body = await response.Content.ReadFromJsonAsync<TopFiveDestinationsResponse>();
-            //    return body;
-            //}
-            return null;
+            using (var response = await client.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+                var body = await response.Content.ReadFromJsonAsync<TopFiveDestinationsResponse>();
+                return body;
+            }
         }
     }
 }
